@@ -1,4 +1,5 @@
 import cats.Functor
+import cats.instances.function._
 import cats.syntax.functor._
 
 
@@ -12,3 +13,9 @@ implicit val treeFunctor = new Functor[Tree] {
     case Branch(l,r) => Branch(map(l)(f), map(r)(f))
     case Leaf(a) => Leaf(f(a))
   }
+}
+def branch[A](left: Tree[A], right: Tree[A]): Tree[A] =
+  Branch(left, right)
+
+def leaf[A](value: A): Tree[A] =
+  Leaf(value)
